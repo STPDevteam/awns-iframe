@@ -38,7 +38,7 @@ export default function Token({ params, searchParams }: TokenParams) {
     nftMetadata,
     loading: nftMetadataLoading,
   } = useNft({
-    tokenId: parseInt(tokenId as string),
+    tokenId: tokenId,
     contractAddress: params.contractAddress as `0x${string}`,
     hasCustomImplementation: HAS_CUSTOM_IMPLEMENTATION,
     chainId: chainIdNumber,
@@ -143,6 +143,9 @@ export default function Token({ params, searchParams }: TokenParams) {
                   imagesLoaded ? "" : "blur-xl"
                 }`}
               >
+                <div className="absolute left-[60px] top-[22px] z-10" style={{ mixBlendMode: 'difference' }}>
+                  {nftMetadata?.title}
+                </div>
                 {!isNil(nftImages) ? (
                   nftImages.map((image, i) => (
                     <img

@@ -1,6 +1,6 @@
 import { NftOrdering } from "alchemy-sdk";
 import * as Sentry from "@sentry/nextjs";
-import { MAX_TOKEN_ID, nftUrl } from "@/lib/constants";
+import { nftUrl } from "@/lib/constants";
 import { alchemyLens, getAlchemy } from "@/lib/clients";
 
 export async function getNfts(chainId: number, account: string) {
@@ -57,14 +57,15 @@ export async function getLensNfts(account: string) {
   }
 }
 
-type TokenId = number & { __tokenIdBrand: never };
+type TokenId = number | string & { __tokenIdBrand: never };
 
-function isTokenId(value: number): value is TokenId {
-  return value >= 0 && value <= MAX_TOKEN_ID;
+function isTokenId(value: number | string): value is TokenId {
+  value = Number(value)
+  return !!(value && !isNaN((value)));
 }
 
 export async function getNftAsset(
-  tokenId: number,
+  tokenId: number | string,
   apiEndpoint?: string
 ): Promise<string[] | string> {
   if (isTokenId(tokenId)) {
@@ -78,6 +79,6 @@ export async function getNftAsset(
     return data;
     // return data.image.replace("ipfs://", "https://ipfs.io/ipfs/");
   } else {
-    throw new Error(`TokenId must be between 0 and ${MAX_TOKEN_ID}`);
+    throw new Error(`TokenId must be effective number`);
   }
 }

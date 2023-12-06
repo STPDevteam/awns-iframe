@@ -36,7 +36,7 @@ export default function Token({ params, searchParams }: TokenParams) {
     nftMetadata,
     loading: nftMetadataLoading,
   } = useNft({
-    tokenId: parseInt(tokenId as string),
+    tokenId: tokenId,
     contractAddress: params.contractAddress as `0x${string}`,
     hasCustomImplementation: HAS_CUSTOM_IMPLEMENTATION,
     chainId: CHAIN_ID,

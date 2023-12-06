@@ -30,7 +30,7 @@ export const useNft = ({
   hasCustomImplementation,
   chainId,
 }: {
-  tokenId: number;
+  tokenId: string;
   apiEndpoint?: string;
   refreshInterval?: number;
   cacheKey?: string;
