@@ -150,7 +150,7 @@ export default function Token({ params, searchParams }: TokenParams) {
                   nftImages.map((image, i) => (
                     <img
                       key={i}
-                      className="col-span-1 col-start-1 row-span-1 row-start-1 translate-x-0"
+                      className={`col-span-1 col-start-1 row-span-1 row-start-1 translate-x-0 ${nftImages.length===1 ? 'w-full': ''}`}
                       src={image}
                       alt="Nft image"
                     />
